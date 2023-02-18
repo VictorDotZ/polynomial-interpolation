@@ -39,12 +39,15 @@ static double applyPolynomialLagrangian(
 	return res;
 }
 
+// Horner's method
 double applyPolynomialCanonical(const std::vector<double>& a, double x)
 {
-	double res = 0.0;
-	for (size_t i = 0; i < a.size(); ++i)
-		res += a[i] * std::pow(x, i);
-	return res;
+	double res = a[a.size() - 1] * x;
+	for (size_t i = a.size() - 2; i > 0; --i) {
+		res += a[i];
+		res *= x;
+	}
+	return res + a[0];
 }
 
 void printRow(double x_i, const std::vector<double>& x,
